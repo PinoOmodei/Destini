@@ -8,6 +8,8 @@
 
 import UIKit
 
+var storyBrain = StoryBrain()
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var storyLabel: UILabel!
@@ -16,9 +18,23 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateUI()
 
     }
 
+    @IBAction func choiceButtonPressed(_ sender: UIButton) {
+
+        storyBrain.goToNextStory(choice: sender.currentTitle!)
+        
+        updateUI()
+    }
+    
+    func updateUI() {
+        storyLabel.text = storyBrain.getStoryText()
+        choice1Button.setTitle(storyBrain.getChoice1(), for: .normal)
+        choice2Button.setTitle(storyBrain.getChoice2(), for: .normal)
+    }
 
 }
 
